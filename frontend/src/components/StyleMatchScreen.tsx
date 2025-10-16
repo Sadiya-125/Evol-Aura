@@ -17,19 +17,19 @@ const celebrityImages: Record<string, string[]> = {
     "/celebrity-images/deepika-padukone-3.avif",
   ],
   zendaya: [
-    "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/1468379/pexels-photo-1468379.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "/celebrity-images/zendaya-1.webp",
+    "/celebrity-images/zendaya-2.webp",
+    "/celebrity-images/zendaya-3.jpg",
   ],
   alia: [
-    "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "/celebrity-images/alia-bhatt-1.webp",
+    "/celebrity-images/alia-bhatt-2.jpg",
+    "/celebrity-images/alia-bhatt-3.webp",
   ],
   taylor: [
-    "https://images.pexels.com/photos/1468379/pexels-photo-1468379.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "/celebrity-images/taylor-swift-1.webp",
+    "/celebrity-images/taylor-swift-2.avif",
+    "/celebrity-images/taylor-swift-3.webp",
   ],
 };
 
