@@ -105,63 +105,66 @@ export const SurveyScreen = ({ language, onComplete }: SurveyScreenProps) => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-8 flex items-center justify-center">
+    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-4 sm:p-8 md:p-12 flex items-center justify-center">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.15),transparent_50%)]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-5xl">
-        <div className="mb-8 flex items-center justify-between">
-          <div className="ml-auto flex gap-2">
+      <div className="relative z-10 w-full max-w-4xl sm:max-w-5xl">
+        <div className="mb-4 sm:mb-8 flex items-center justify-between">
+          <div className="ml-auto flex gap-1 sm:gap-2">
             {[...Array(5)].map((_, i) => (
               <div
                 key={i}
                 className={`h-2 rounded-full transition-all ${
-                  i <= step ? "w-12 bg-amber-500" : "w-8 bg-white/20"
+                  i <= step
+                    ? "w-8 sm:w-12 bg-amber-500"
+                    : "w-6 sm:w-8 bg-white/20"
                 }`}
               />
             ))}
           </div>
         </div>
 
-        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-16 shadow-2xl">
+        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-12 md:p-16 shadow-2xl">
           {step > 0 && (
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 text-white/60 hover:text-white text-2xl transition-colors"
+              className="flex items-center gap-2 text-white/60 hover:text-white text-lg sm:text-2xl transition-colors mb-6"
             >
-              <ChevronLeft className="w-8 h-8" />
+              <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
               {translate("common.back", language)}
             </button>
           )}
+
           {!isCelebrityStep ? (
             <div className="animate-fade-in">
-              <h2 className="text-5xl font-light text-white mb-16 text-center">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white mb-8 sm:mb-16 text-center">
                 {currentQuestion.question}
               </h2>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 {currentQuestion.options.map((option) => (
                   <button
                     key={option.value}
                     onClick={() => handleAnswer(option.value)}
-                    className="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-500/50 rounded-2xl p-12 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                    className="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-500/50 rounded-2xl p-6 sm:p-12 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    <span className="text-3xl text-white font-light">
+                    <span className="text-xl sm:text-2xl md:text-3xl text-white font-light">
                       {option.label}
                     </span>
-                    <ChevronRight className="absolute right-6 top-1/2 -translate-y-1/2 w-8 h-8 text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ChevronRight className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 w-6 sm:w-8 text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </button>
                 ))}
               </div>
             </div>
           ) : (
             <div className="animate-fade-in">
-              <h2 className="text-5xl font-light text-white mb-16 text-center">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white mb-8 sm:mb-16 text-center">
                 {translate("survey.q5", language)}
               </h2>
 
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                 {celebrities.map((celebrity) => (
                   <button
                     key={celebrity.id}
@@ -173,14 +176,14 @@ export const SurveyScreen = ({ language, onComplete }: SurveyScreenProps) => {
                       alt={
                         language === "en" ? celebrity.name : celebrity.nameHi
                       }
-                      className="w-full h-96 object-cover"
+                      className="w-full h-64 sm:h-80 md:h-96 object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-8 text-left">
-                      <h3 className="text-3xl font-light text-white mb-2">
+                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-left">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-light text-white mb-1 sm:mb-2">
                         {language === "en" ? celebrity.name : celebrity.nameHi}
                       </h3>
-                      <p className="text-xl text-amber-400">
+                      <p className="text-lg sm:text-xl md:text-2xl text-amber-400">
                         {language === "en" ? celebrity.vibe : celebrity.vibeHi}
                       </p>
                     </div>

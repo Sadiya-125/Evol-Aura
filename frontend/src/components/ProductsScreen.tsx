@@ -41,36 +41,36 @@ export const ProductsScreen = ({
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-8">
+    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-4 sm:p-6 md:p-8">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.15),transparent_50%)]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-12">
-          <h1 className="text-5xl font-serif text-amber-100 ml-10 mt-[-5px]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-12 gap-6 sm:gap-0">
+          <h1 className="text-4xl sm:text-5xl font-serif text-amber-100 mt-14 sm:mt-18 lg:mt-22">
             {translate("products.title", language)}
           </h1>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             {/* Filter Button */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-8 py-4 rounded-2xl transition-all text-white text-xl"
+              className="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-3 sm:py-4 rounded-2xl transition-all text-white text-lg sm:text-xl w-full sm:w-auto"
             >
-              <SlidersHorizontal className="w-6 h-6" />
+              <SlidersHorizontal className="w-5 h-5 sm:w-6 sm:h-6" />
               {translate("products.filter", language)}
             </button>
 
             {/* Wishlist Button */}
             <button
               onClick={onViewWishlist}
-              className="relative flex items-center gap-3 bg-amber-600 hover:bg-amber-500 px-8 py-4 rounded-2xl transition-all text-white text-xl"
+              className="relative flex items-center justify-center gap-3 bg-amber-600 hover:bg-amber-500 px-4 py-3 sm:py-4 rounded-2xl transition-all text-white text-lg sm:text-xl w-full sm:w-auto"
             >
-              <Heart className="w-6 h-6" />
+              <Heart className="w-5 h-5 sm:w-6 sm:h-6" />
               {translate("nav.wishlist", language)}
               {wishlist.size > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-sm w-8 h-8 rounded-full flex items-center justify-center font-bold">
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs sm:text-sm w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold">
                   {wishlist.size}
                 </span>
               )}
@@ -78,17 +78,22 @@ export const ProductsScreen = ({
 
             {/* Try On Button */}
             <button
-              onClick={() => window.open("http://localhost:7860/", "_blank")}
-              className="flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-2xl transition-all text-white text-xl"
+              onClick={() =>
+                window.open(
+                  "https://huggingface.co/spaces/Sadiya025/GemFit",
+                  "_blank"
+                )
+              }
+              className="flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 px-5 py-3 sm:py-4 rounded-2xl transition-all text-white text-lg sm:text-xl w-full sm:w-auto"
             >
-              <Sparkles className="w-6 h-6" />
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
               {translate("nav.tryon", language)}
             </button>
           </div>
         </div>
 
         {showFilters && (
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 mb-8">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-2xl text-white font-light">
                 {translate("products.filter", language)}
@@ -101,12 +106,12 @@ export const ProductsScreen = ({
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-4">
               <div>
-                <label className="text-white text-xl mb-4 block">
+                <label className="text-white text-lg sm:text-xl mb-2 block">
                   {translate("products.price", language)}
                 </label>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <input
                     type="range"
                     min="0"
@@ -118,17 +123,17 @@ export const ProductsScreen = ({
                     }
                     className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   />
-                  <span className="text-white text-xl whitespace-nowrap">
+                  <span className="text-white text-lg sm:text-xl whitespace-nowrap">
                     {formatPrice(priceRange[1], language)}
                   </span>
                 </div>
               </div>
 
               <div>
-                <label className="text-white text-xl mb-4 block">
+                <label className="text-white text-lg sm:text-xl mb-2 block">
                   {translate("survey.q6", language)}
                 </label>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {(
                     ["gold", "rose-gold", "silver", "platinum"] as MetalType[]
                   ).map((metal) => (
@@ -139,7 +144,7 @@ export const ProductsScreen = ({
                           selectedMetal === metal ? undefined : metal
                         )
                       }
-                      className={`px-6 py-3 rounded-xl transition-all text-lg ${
+                      className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl transition-all text-sm sm:text-lg ${
                         selectedMetal === metal
                           ? "bg-amber-600 text-white"
                           : "bg-white/10 text-white/80 hover:bg-white/20"
@@ -154,14 +159,14 @@ export const ProductsScreen = ({
 
             <button
               onClick={resetFilters}
-              className="text-amber-400 hover:text-amber-300 text-lg transition-colors"
+              className="text-amber-400 hover:text-amber-300 text-base sm:text-lg transition-colors"
             >
               Reset Filters
             </button>
           </div>
         )}
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
@@ -174,8 +179,8 @@ export const ProductsScreen = ({
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="text-center py-24">
-            <p className="text-3xl text-white/60">
+          <div className="text-center py-16 sm:py-24">
+            <p className="text-2xl sm:text-3xl text-white/60">
               No Products Match Your Filters. Try Adjusting Your Preferences.
             </p>
           </div>

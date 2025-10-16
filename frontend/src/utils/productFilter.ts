@@ -16,39 +16,34 @@ export const filterProducts = (
   return products.filter((product) => {
     if (!product.inStock) return false;
 
+    const price = Number(String(product.price).replace(/[^\d.-]/g, ""));
+
     if (priceRange) {
-      if (product.price < priceRange[0] || product.price > priceRange[1]) {
-        return false;
-      }
+      if (price < priceRange[0] || price > priceRange[1]) return false;
     } else if (survey.budgetRange) {
-      const [min, max] = budgetRanges[survey.budgetRange];
-      if (product.price < min || product.price > max) {
-        return false;
-      }
+      const range = budgetRanges[survey.budgetRange];
+      if (!range) return false;
+      const [min, max] = range;
+      if (price < min || price > max) return false;
     }
 
     const metalToMatch = selectedMetal || survey.metalPreference;
-    if (metalToMatch && product.metalType !== metalToMatch) {
-      return false;
-    }
+    if (metalToMatch && product.metalType !== metalToMatch) return false;
 
     if (
       survey.stylePreference &&
       !product.styleTags.includes(survey.stylePreference)
-    ) {
+    )
       return false;
-    }
 
-    if (survey.occasion && !product.occasionTags.includes(survey.occasion)) {
+    if (survey.occasion && !product.occasionTags.includes(survey.occasion))
       return false;
-    }
 
     if (
       survey.celebrityChoice &&
       !product.celebrityMatch.includes(survey.celebrityChoice)
-    ) {
+    )
       return false;
-    }
 
     return true;
   });
@@ -82,13 +77,6 @@ export const scoreProduct = (
     score += 2;
   }
 
-  if (survey.budgetRange) {
-    const [min, max] = budgetRanges[survey.budgetRange];
-    if (product.price >= min && product.price <= max) {
-      score += 1;
-    }
-  }
-
   return score;
 };
 
@@ -97,8 +85,16 @@ export const getRecommendedProducts = (
   survey: SurveyResponse,
   limit: number = 12
 ): Product[] => {
-  const scored = products
-    .filter((p) => p.inStock)
+  let filtered = products.filter((p) => p.inStock);
+
+  if (survey.budgetRange) {
+    const [min, max] = budgetRanges[survey.budgetRange];
+    filtered = filtered.filter(
+      (product) => product.price >= min && product.price <= max
+    );
+  }
+
+  const scored = filtered
     .map((product) => ({
       product,
       score: scoreProduct(product, survey),

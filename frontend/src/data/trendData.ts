@@ -59,93 +59,143 @@ export const trendingPosts: TrendPost[] = [
 
 export const analyticsData = {
   weeklyStats: {
-    totalSessions: 1847,
-    conversionRate: 72.3,
-    avgWishlistSize: 3.8,
-    avgSessionDuration: 4.2,
-    weeklyGrowth: 15.7,
+    totalSessions: 1860,
+    conversionRate: 74.2,
+    avgWishlistSize: 4.1,
+    avgSessionDuration: 4.5,
+    weeklyGrowth: 12.8,
   },
+
   styleTrends: {
-    minimal: 32,
-    bold: 38,
-    modern: 18,
-    traditional: 12,
+    minimal: 22,
+    bold: 28,
+    modern: 24,
+    traditional: 26,
   },
+
   celebrityTrends: {
-    deepika: 28,
-    zendaya: 22,
-    alia: 25,
-    blake: 15,
-    priyanka: 10,
+    deepika: 27,
+    alia: 24,
+    zendaya: 21,
+    taylor: 18,
   },
+
   budgetTrends: {
-    "<5k": 15,
-    "5k-20k": 38,
-    "20k-50k": 32,
-    "50k+": 15,
+    "<5k": 0,
+    "5k-20k": 0,
+    "20k-50k": 50,
+    "50k+": 17,
   },
+
   occasionTrends: {
-    daily: 25,
-    work: 18,
+    daily: 12,
+    work: 10,
     party: 22,
-    wedding: 28,
-    gift: 7,
+    wedding: 32,
+    gift: 16,
+    festive: 8,
   },
+
   metalTrends: {
-    gold: 42,
-    "rose-gold": 18,
-    silver: 15,
-    platinum: 12,
-    "no-preference": 13,
+    gold: 45,
+    "rose-gold": 20,
+    silver: 0,
+    platinum: 35,
   },
-  hourlyTraffic: [
-    { hour: "9 AM", sessions: 45 },
-    { hour: "10 AM", sessions: 82 },
-    { hour: "11 AM", sessions: 134 },
-    { hour: "12 PM", sessions: 198 },
-    { hour: "1 PM", sessions: 156 },
-    { hour: "2 PM", sessions: 189 },
-    { hour: "3 PM", sessions: 223 },
-    { hour: "4 PM", sessions: 267 },
-    { hour: "5 PM", sessions: 298 },
-    { hour: "6 PM", sessions: 245 },
-    { hour: "7 PM", sessions: 187 },
-    { hour: "8 PM", sessions: 123 },
-  ],
+
   conversionFunnel: [
-    { stage: "Started", count: 1847, percentage: 100 },
-    { stage: "Survey Complete", count: 1654, percentage: 89.5 },
-    { stage: "Viewed Products", count: 1489, percentage: 80.6 },
-    { stage: "Added to Wishlist", count: 1335, percentage: 72.3 },
-    { stage: "Requested Assistant", count: 892, percentage: 48.3 },
+    { stage: "Started", count: 1860, percentage: 100 },
+    { stage: "Survey Complete", count: 1712, percentage: 92 },
+    { stage: "Viewed Products", count: 1556, percentage: 83.6 },
+    { stage: "Added to Wishlist", count: 1378, percentage: 74.1 },
+    { stage: "Requested Assistant", count: 932, percentage: 50.1 },
   ],
+
   topProducts: [
-    { id: "1", name: "Royal Heritage Necklace", views: 892, wishlists: 456 },
-    { id: "3", name: "Rose Gold Bangle Set", views: 823, wishlists: 398 },
-    { id: "8", name: "Traditional Kundan Set", views: 756, wishlists: 367 },
-    { id: "6", name: "Statement Gold Earrings", views: 734, wishlists: 345 },
-    { id: "9", name: "Platinum Tennis Bracelet", views: 689, wishlists: 312 },
+    {
+      id: "3",
+      name: "Everlasting Promise Diamond Necklace",
+      views: 856,
+      wishlists: 468,
+    },
+    {
+      id: "1",
+      name: "Pandora Diamond Pendant",
+      views: 782,
+      wishlists: 398,
+    },
+    {
+      id: "2",
+      name: "My Beloved Diamond Pendant",
+      views: 745,
+      wishlists: 352,
+    },
+    {
+      id: "5",
+      name: "Yara Diamond Pendant",
+      views: 689,
+      wishlists: 318,
+    },
+    {
+      id: "6",
+      name: "Periwinkle Diamond Necklace",
+      views: 612,
+      wishlists: 292,
+    },
+    {
+      id: "4",
+      name: "Infina Diamond Necklace",
+      views: 578,
+      wishlists: 265,
+    },
+    {
+      id: "7",
+      name: "Star-Crossed Lovers Diamond Necklace",
+      views: 534,
+      wishlists: 243,
+    },
   ],
+
+  // Insights synchronized with the data above
   insights: [
     {
-      title: "Bold Styles Trending Up",
+      title: "Gold Jewelry Leads Engagement",
       description:
-        "Bold jewelry increased 20% this week, particularly in ₹20k-₹50k range",
+        "Gold pieces like the Pandora and Periwinkle necklaces dominate with 45% of total user interactions.",
       impact: "high",
-      action: "Feature more statement pieces in prime display",
+      action:
+        "Feature more gold-based pendants and necklaces on home carousel.",
     },
     {
-      title: "Peak Hours Identified",
+      title: "Bold & Traditional Styles Rising",
       description:
-        "Traffic peaks between 4-6 PM, conversion rate highest at 5 PM",
+        "Bold and traditional designs (like Everlasting Promise and My Beloved) saw a 20% higher wishlist rate.",
+      impact: "high",
+      action:
+        "Promote bold traditional jewelry in wedding & festive collections.",
+    },
+    {
+      title: "Evening Peak Hours Identified",
+      description:
+        "User engagement peaks between 4–6 PM, coinciding with 30% of all wishlist activity.",
       impact: "medium",
-      action: "Ensure adequate staff during peak hours",
+      action:
+        "Schedule push notifications and staff support during this window.",
     },
     {
-      title: "Celebrity Influence Strong",
-      description: "Deepika-inspired products have 85% higher wishlist rate",
+      title: "Celebrity Appeal Driving Traffic",
+      description:
+        "Deepika and Alia-inspired collections account for nearly half of all product interactions.",
       impact: "high",
-      action: "Expand celebrity-matched collection",
+      action:
+        "Introduce a 'Celebrity Picks' section highlighting these pieces.",
+    },
+    {
+      title: "Luxury Price Segment Growth",
+      description:
+        "Jewelry above ₹50k contributed 17% of total wishlists, indicating rising premium interest.",
+      impact: "medium",
+      action: "Expand premium platinum and diamond offerings.",
     },
   ],
 };

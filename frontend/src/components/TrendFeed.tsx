@@ -50,9 +50,9 @@ export const TrendFeed = ({
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8 lg:mb-12">
           <div className="w-full flex items-start sm:items-center gap-3">
-            <div className="flex items-center gap-3 ml-[30px]">
+            <div className="flex items-center gap-3 ml-[30px] mt-14 sm:mt-18 lg:mt-22">
               <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-amber-400" />
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-amber-100">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif text-amber-100 break-words">
                 {language === "en" ? "Trending Now" : "ट्रेंडिंग अभी"}
               </h1>
             </div>

@@ -69,7 +69,7 @@ export const mockProducts: Product[] = [
     metalType: "platinum",
     styleTags: ["bold", "traditional"],
     occasionTags: ["wedding", "party"],
-    celebrityMatch: ["blake", "deepika"],
+    celebrityMatch: ["taylor", "deepika"],
     inStock: true,
   },
   {

@@ -39,7 +39,34 @@ export const WishlistScreen = ({
 
     setLoading(true);
     try {
-      const topic = wishlistProducts.map((p) => p.name).join(", ");
+      const capitalizeWords = (str: string) =>
+        str
+          .split(",")
+          .map((s) =>
+            s
+              .trim()
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")
+          )
+          .join(", ");
+
+      const topic = wishlistProducts
+        .map((p) => {
+          const name = p.name;
+          const price = `Rs. ${p.price.toFixed(2)}`;
+          const styles = capitalizeWords(p.styleTags.join(", "));
+          const metal = capitalizeWords(p.metalType);
+          const occasions = capitalizeWords(p.occasionTags.join(", "));
+          const celebrities = capitalizeWords(p.celebrityMatch.join(", "));
+          const stockStatus = p.inStock ? "In Stock" : "Out of Stock";
+          const trend = p.trendScore ? `Trend Score: ${p.trendScore}` : "";
+
+          return `${name} - Price: ${price}, Styles: ${styles}, Metal: ${metal}, Occasions: ${occasions}, Celebrities: ${celebrities}, ${stockStatus}${
+            trend ? `, ${trend}` : ""
+          }`;
+        })
+        .join(" | ");
 
       const { data, error } = await supabase
         .from("companions")
@@ -71,73 +98,74 @@ export const WishlistScreen = ({
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-8">
+    <div className="relative min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-4 sm:p-6 md:p-8">
       {/* Background Glow */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.15),transparent_50%)]" />
       </div>
 
       {/* Top Bar Button */}
-      <div className="absolute top-8 right-8 z-20">
+      <div className="absolute right-4 sm:right-8 z-20 mt-[54px] sm:mt-[50px] lg:mt-12">
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white text-lg px-6 py-3 rounded-xl shadow-lg shadow-amber-600/30 transition-all"
+          className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white text-sm sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-xl shadow-lg shadow-amber-600/30 transition-all"
         >
-          <MessageSquare className="w-5 h-5" />
+          <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
           Speak with AI
         </button>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <h1 className="text-5xl font-serif text-amber-100 mb-12 ml-10 mt-1">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-amber-100 mb-8 sm:mb-12 mt-14 sm:mt-18 lg:mt-22">
           {translate("wishlist.title", language)}
         </h1>
-        <div className="grid grid-cols-3 gap-8">
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Wishlist Section */}
-          <div className="col-span-2">
+          <div className="lg:col-span-2">
             {wishlistProducts.length === 0 ? (
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-16 text-center">
-                <p className="text-3xl text-white/60 mb-8">
+              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-12 sm:p-16 text-center">
+                <p className="text-2xl sm:text-3xl text-white/60 mb-6 sm:mb-8">
                   {translate("wishlist.empty", language)}
                 </p>
                 <button
                   onClick={onBack}
-                  className="bg-amber-600 hover:bg-amber-500 text-white text-xl px-12 py-4 rounded-2xl transition-all"
+                  className="bg-amber-600 hover:bg-amber-500 text-white text-lg sm:text-xl px-8 sm:px-12 py-3 sm:py-4 rounded-2xl transition-all"
                 >
                   {translate("wishlist.browse", language)}
                 </button>
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {wishlistProducts.map((product) => (
                   <div
                     key={product.id}
                     className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-amber-500/50 transition-all"
                   >
-                    <div className="flex">
+                    <div className="flex flex-col sm:flex-row">
                       <img
                         src={product.imageUrl}
                         alt={language === "en" ? product.name : product.nameHi}
-                        className="w-48 h-48 object-cover"
+                        className="w-full sm:w-48 h-48 object-cover"
                       />
-                      <div className="flex-1 p-6 flex items-center justify-between">
+                      <div className="flex-1 p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div>
-                          <h3 className="text-2xl font-light text-white mb-2">
+                          <h3 className="text-xl sm:text-2xl font-light text-white mb-1 sm:mb-2">
                             {language === "en" ? product.name : product.nameHi}
                           </h3>
-                          <p className="text-3xl font-light text-amber-400 mb-3">
+                          <p className="text-2xl sm:text-3xl font-light text-amber-400 mb-2 sm:mb-3">
                             {formatPrice(product.price, language)}
                           </p>
                           <div className="flex flex-wrap gap-2">
                             {product.styleTags.slice(0, 2).map((tag) => (
                               <span
                                 key={tag}
-                                className="px-3 py-1 bg-white/10 text-white/80 rounded-full text-sm"
+                                className="px-2 sm:px-3 py-1 bg-white/10 text-white/80 rounded-full text-xs sm:text-sm"
                               >
                                 {translate(`style.${tag}`, language)}
                               </span>
                             ))}
-                            <span className="px-3 py-1 bg-amber-600/20 text-amber-400 rounded-full text-sm">
+                            <span className="px-2 sm:px-3 py-1 bg-amber-600/20 text-amber-400 rounded-full text-xs sm:text-sm">
                               {translate(
                                 `metal.${product.metalType}`,
                                 language
@@ -147,10 +175,10 @@ export const WishlistScreen = ({
                         </div>
                         <button
                           onClick={() => onRemoveFromWishlist(product.id)}
-                          className="p-4 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-xl transition-all"
+                          className="p-2 sm:p-4 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-xl transition-all ml-auto sm:ml-0 flex-shrink-0"
                           aria-label="Remove from wishlist"
                         >
-                          <Trash2 className="w-6 h-6" />
+                          <Trash2 className="w-4 h-4 sm:w-6 sm:h-6" />
                         </button>
                       </div>
                     </div>
@@ -161,42 +189,44 @@ export const WishlistScreen = ({
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6 mt-6 lg:mt-0">
             {/* QR & Assistant */}
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <QrCode className="w-8 h-8 text-amber-400" />
-                <h3 className="text-2xl font-light text-white">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 md:p-8">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <QrCode className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 shrink-0" />
+                <h3 className="text-lg sm:text-2xl font-light text-white">
                   {translate("wishlist.scan", language)}
                 </h3>
               </div>
 
-              <div className="bg-white p-6 rounded-xl mb-6">
+              <div className="bg-white p-4 sm:p-6 rounded-xl mb-4 sm:mb-6">
                 <div className="aspect-square bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-lg flex items-center justify-center">
                   <div className="text-center">
-                    <QrCode className="w-32 h-32 text-amber-400 mx-auto mb-4" />
-                    <p className="text-xs text-white/60 font-mono break-all px-4">
+                    <QrCode className="w-24 h-24 sm:w-32 sm:h-32 text-amber-400 mx-auto mb-2 sm:mb-4" />
+                    <p className="text-xs sm:text-sm text-white/60 font-mono break-all px-2 sm:px-4">
                       {qrCodeData}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <p className="text-white/60 text-center text-sm mb-6">
+              <p className="text-white/60 text-center text-xs sm:text-sm mb-4 sm:mb-6">
                 Scan this QR Code with Your Phone to Receive Your Wishlist via
                 Email or WhatsApp
               </p>
 
-              <button className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white text-xl font-light py-4 rounded-xl transition-all duration-300 shadow-lg shadow-amber-600/30 hover:shadow-amber-600/50 flex items-center justify-center gap-3">
-                <User className="w-6 h-6" />
+              <button className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white text-sm sm:text-lg font-light py-3 sm:py-4 rounded-xl transition-all duration-300 shadow-lg shadow-amber-600/30 hover:shadow-amber-600/50 flex items-center justify-center gap-2">
+                <User className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
                 {translate("wishlist.assistant", language)}
               </button>
             </div>
 
             {/* Summary */}
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-              <h3 className="text-xl font-light text-white mb-4">Summary</h3>
-              <div className="space-y-3">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 md:p-8">
+              <h3 className="text-lg sm:text-xl font-light text-white mb-2 sm:mb-4">
+                Summary
+              </h3>
+              <div className="space-y-2 sm:space-y-3">
                 <div className="flex justify-between text-white/80">
                   <span>Total Items:</span>
                   <span className="font-medium">{wishlistProducts.length}</span>
@@ -214,84 +244,93 @@ export const WishlistScreen = ({
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Modal for AI Companion */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-neutral-900 border border-white/10 rounded-2xl p-8 w-[480px] shadow-2xl">
-            <h2 className="text-2xl font-light text-white mb-6">
-              Create AI Companion
-            </h2>
-            <div className="space-y-4">
-              <input
-                placeholder="Companion Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full p-3 bg-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-500"
-              />
+        {/* Modal for AI Companion */}
+        {showModal && (
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
+            <div className="bg-neutral-900 border border-white/10 rounded-2xl p-4 sm:p-6 md:p-8 w-full max-w-md sm:max-w-lg shadow-2xl">
+              <h2 className="text-xl sm:text-2xl font-light text-white mb-4 sm:mb-6">
+                Create AI Companion
+              </h2>
+              <div className="space-y-3 sm:space-y-4">
+                <input
+                  placeholder="Companion Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full p-2 sm:p-3 bg-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                />
 
-              <div className="flex gap-4">
-                <select
-                  value={style}
-                  onChange={(e) =>
-                    setStyle(e.target.value as "formal" | "casual")
-                  }
-                  className="flex-1 p-3 bg-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
-                >
-                  <option value="formal" className="bg-neutral-900 text-white">
-                    Formal
-                  </option>
-                  <option value="casual" className="bg-neutral-900 text-white">
-                    Casual
-                  </option>
-                </select>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                  <select
+                    value={style}
+                    onChange={(e) =>
+                      setStyle(e.target.value as "formal" | "casual")
+                    }
+                    className="flex-1 p-2 sm:p-3 bg-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
+                  >
+                    <option
+                      value="formal"
+                      className="bg-neutral-900 text-white"
+                    >
+                      Formal
+                    </option>
+                    <option
+                      value="casual"
+                      className="bg-neutral-900 text-white"
+                    >
+                      Casual
+                    </option>
+                  </select>
 
-                <select
-                  value={voice}
-                  onChange={(e) =>
-                    setVoice(e.target.value as "male" | "female")
-                  }
-                  className="flex-1 p-3 bg-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
-                >
-                  <option value="female" className="bg-neutral-900 text-white">
-                    Female
-                  </option>
-                  <option value="male" className="bg-neutral-900 text-white">
-                    Male
-                  </option>
-                </select>
-              </div>
+                  <select
+                    value={voice}
+                    onChange={(e) =>
+                      setVoice(e.target.value as "male" | "female")
+                    }
+                    className="flex-1 p-2 sm:p-3 bg-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
+                  >
+                    <option
+                      value="female"
+                      className="bg-neutral-900 text-white"
+                    >
+                      Female
+                    </option>
+                    <option value="male" className="bg-neutral-900 text-white">
+                      Male
+                    </option>
+                  </select>
+                </div>
 
-              <input
-                type="number"
-                min={1}
-                max={10}
-                value={duration}
-                onChange={(e) => setDuration(Number(e.target.value))}
-                className="w-full p-3 bg-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                placeholder="Duration (mins)"
-              />
+                <input
+                  type="number"
+                  min={1}
+                  max={10}
+                  value={duration}
+                  onChange={(e) => setDuration(Number(e.target.value))}
+                  className="w-full p-2 sm:p-3 bg-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  placeholder="Duration (mins)"
+                />
 
-              <div className="flex justify-end gap-3 pt-4">
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="px-6 py-3 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleCreateCompanion}
-                  disabled={loading}
-                  className="px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white disabled:opacity-50 transition-all"
-                >
-                  {loading ? "Creating..." : "Create & Speak"}
-                </button>
+                <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-2 sm:pt-4">
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleCreateCompanion}
+                    disabled={loading}
+                    className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white disabled:opacity-50 transition-all"
+                  >
+                    {loading ? "Creating..." : "Create & Speak"}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -129,7 +129,7 @@ const translations: Record<TranslationKey, TranslationDict> = {
     hi: "आप साझा करते हैं",
   },
   "match.cta": {
-    en: "View Your Matching Jewelry",
+    en: "View Your Matching Jewellery",
     hi: "अपनी मैचिंग ज्वेलरी देखें",
   },
   "products.title": {

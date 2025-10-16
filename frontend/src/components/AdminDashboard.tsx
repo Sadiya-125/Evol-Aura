@@ -5,7 +5,6 @@ import {
   Sparkles,
   Download,
   BarChart3,
-  PieChart,
   Activity,
 } from "lucide-react";
 import type { Language } from "../types";
@@ -125,8 +124,8 @@ export const AdminDashboard = ({ language, onBack }: AdminDashboardProps) => {
                           ? "Zendaya"
                           : celeb === "alia"
                           ? "Alia"
-                          : celeb === "priyanka"
-                          ? "Priyanka"
+                          : celeb === "taylor"
+                          ? "Taylor"
                           : "Blake"}
                       </span>
                       <span className="font-medium text-amber-400">
@@ -142,40 +141,6 @@ export const AdminDashboard = ({ language, onBack }: AdminDashboardProps) => {
                   </div>
                 ))}
             </div>
-          </div>
-        </div>
-
-        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl lg:rounded-2xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
-          <h3 className="text-xl sm:text-2xl font-light text-white mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-            <PieChart className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
-            Hourly Traffic
-          </h3>
-          <div className="flex items-end justify-between gap-1 sm:gap-2 h-48 sm:h-64">
-            {analyticsData.hourlyTraffic.map((data) => {
-              const maxSessions = Math.max(
-                ...analyticsData.hourlyTraffic.map((d) => d.sessions)
-              );
-              const heightPercent = (data.sessions / maxSessions) * 100;
-              return (
-                <div
-                  key={data.hour}
-                  className="flex-1 flex flex-col items-center gap-2"
-                >
-                  <div className="w-full flex flex-col items-center">
-                    <span className="text-xs text-white/60 mb-1">
-                      {data.sessions}
-                    </span>
-                    <div
-                      className="w-full bg-gradient-to-t from-amber-600 to-amber-400 rounded-t transition-all duration-500 hover:from-amber-500 hover:to-amber-300"
-                      style={{ height: `${heightPercent}%`, minHeight: "20px" }}
-                    />
-                  </div>
-                  <span className="text-[10px] sm:text-xs text-white/40 text-center">
-                    {data.hour.replace(" ", "\n")}
-                  </span>
-                </div>
-              );
-            })}
           </div>
         </div>
 

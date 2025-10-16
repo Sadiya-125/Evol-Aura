@@ -53,26 +53,26 @@ export const StyleMatchScreen = ({
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-8 flex items-center justify-center">
+    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-4 sm:p-8 md:p-12 flex items-center justify-center">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.15),transparent_50%)]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl">
-        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-16 shadow-2xl">
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <Sparkles className="w-12 h-12 text-amber-400 animate-pulse" />
-            <h2 className="text-5xl font-light text-white text-center">
+      <div className="relative z-10 w-full max-w-4xl sm:max-w-6xl">
+        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-12 md:p-16 shadow-2xl">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <Sparkles className="w-8 h-8 sm:w-12 sm:h-12 text-amber-400 animate-pulse" />
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white text-center">
               {translate("match.title", language)}
             </h2>
-            <Sparkles className="w-12 h-12 text-amber-400 animate-pulse" />
+            <Sparkles className="w-8 h-8 sm:w-12 sm:h-12 text-amber-400 animate-pulse" />
           </div>
 
-          <h3 className="text-6xl font-serif text-amber-400 text-center mb-4">
+          <h3 className="text-3xl sm:text-5xl md:text-6xl font-serif text-amber-400 text-center mb-2 sm:mb-4">
             {language === "en" ? celebrity.name : celebrity.nameHi}
           </h3>
 
-          <p className="text-3xl text-white/80 text-center mb-16">
+          <p className="text-lg sm:text-2xl md:text-3xl text-white/80 text-center mb-8 sm:mb-16">
             {translate("match.subtitle", language)}{" "}
             <span className="text-amber-400">
               {language === "en" ? celebrity.vibe : celebrity.vibeHi}
@@ -80,12 +80,12 @@ export const StyleMatchScreen = ({
             Vibe
           </p>
 
-          <div className="relative mb-16">
+          <div className="relative mb-8 sm:mb-16">
             <div className="relative overflow-hidden rounded-2xl">
               <img
                 src={images[currentImageIndex]}
                 alt={`${celebrity.name} style ${currentImageIndex + 1}`}
-                className="w-full h-[500px] object-cover"
+                className="w-full h-64 sm:h-96 md:h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
@@ -94,20 +94,20 @@ export const StyleMatchScreen = ({
               <>
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 backdrop-blur-sm p-4 rounded-full transition-all"
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 backdrop-blur-sm p-2 sm:p-4 rounded-full transition-all"
                   aria-label="Previous image"
                 >
-                  <ChevronLeft className="w-8 h-8 text-white" />
+                  <ChevronLeft className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
                 </button>
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 backdrop-blur-sm p-4 rounded-full transition-all"
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 backdrop-blur-sm p-2 sm:p-4 rounded-full transition-all"
                   aria-label="Next image"
                 >
-                  <ChevronRight className="w-8 h-8 text-white" />
+                  <ChevronRight className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
                 </button>
 
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+                <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
                   {images.map((_, index) => (
                     <button
                       key={index}
@@ -127,7 +127,7 @@ export const StyleMatchScreen = ({
 
           <button
             onClick={onContinue}
-            className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white text-3xl font-light py-8 rounded-2xl transition-all duration-300 shadow-lg shadow-amber-600/30 hover:shadow-amber-600/50 hover:scale-[1.02] active:scale-[0.98]"
+            className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white text-xl sm:text-2xl md:text-3xl font-light py-4 sm:py-8 rounded-2xl transition-all duration-300 shadow-lg shadow-amber-600/30 hover:shadow-amber-600/50 hover:scale-[1.02] active:scale-[0.98]"
           >
             {translate("match.cta", language)}
           </button>
