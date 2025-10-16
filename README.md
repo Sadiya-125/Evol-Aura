@@ -1,7 +1,5 @@
 # Evol Aura - AI-Powered Jewelry Stylist Kiosk
 
-**Fueled Contest 3.0 - Week 1 Proposal**
-
 An innovative AI-powered interactive jewellery stylist kiosk built on a 55-inch touchscreen mirror, designed to revolutionize the jewelry shopping experience by providing personalized recommendations through conversational AI and virtual try-on technology.
 
 ## 🎯 Problem Understanding
@@ -322,7 +320,7 @@ npm run build
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](backend/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👥 Team
 
