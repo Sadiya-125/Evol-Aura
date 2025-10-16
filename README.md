@@ -2,11 +2,11 @@
 
 An innovative AI-powered interactive jewellery stylist kiosk built on a 55-inch touchscreen mirror, designed to revolutionize the jewelry shopping experience by providing personalized recommendations through conversational AI and virtual try-on technology.
 
-## 🎯 Problem Understanding
+## Problem Understanding
 
 Jewelry shopping often overwhelms customers with too many choices, limited personalization, and difficulty visualizing styles. The kiosk solves this by acting as a personal stylist that understands customer preferences, aligns them with celebrity inspirations, and provides tailored jewelry recommendations instantly in-store.
 
-## 🚀 Proposed Solution
+## Proposed Solution
 
 We propose an AI-powered interactive jewellery stylist kiosk built on a 55-inch touchscreen mirror. Customers engage in a dynamic conversational survey about style, occasions, and budget.
 
@@ -20,7 +20,7 @@ Our unique twist is a **"Trend Lens"** feature: the kiosk highlights emerging je
 
 We also plan **multilingual support** (English, Hindi) for inclusivity in Indian retail spaces.
 
-## ✨ Key Features
+## Key Features
 
 - **Conversational, adaptive survey** (voice + touch interaction)
 - **Celebrity AI analysis** with vibe-based clustering (minimal, bold, modern, traditional)
@@ -29,13 +29,13 @@ We also plan **multilingual support** (English, Hindi) for inclusivity in Indian
 - **AI Trend Forecasting Dashboard** - business insights for Evol Jewels
 - **Bonus features**: Trend Lens, multilingual support, accessibility (text size control)
 
-## 🏗️ Technical Approach
+## Technical Approach
 
 - **Recommendation Engine**: Hybrid filtering (survey responses + celebrity match + inventory metadata)
 - **Tech Stack**: Python (AI), TensorFlow/PyTorch (try on matching), Node.js backend, React-based kiosk UI
 - **Optimization**: Designed for 55-inch vertical touchscreen, smooth mirror overlay visuals
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend (Virtual Try-On)
 
@@ -63,7 +63,7 @@ We also plan **multilingual support** (English, Hindi) for inclusivity in Indian
 - **Database**: Supabase (PostgreSQL)
 - **Deployment**: Docker, GitHub Actions
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Evol Aura/
@@ -113,7 +113,7 @@ Evol Aura/
 └── README.md                         # This file
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -181,7 +181,7 @@ docker build -t evol-aura-backend .
 docker run -p 7860:7860 evol-aura-backend
 ```
 
-## 🎮 Usage
+## Usage
 
 ### Kiosk Flow
 
@@ -202,7 +202,7 @@ Access admin features by pressing `Alt + A` on the idle screen:
 - Track celebrity preferences
 - Analyze customer behavior
 
-## 🌟 Features in Detail
+## Features in Detail
 
 ### Conversational Survey
 
@@ -228,7 +228,7 @@ Access admin features by pressing `Alt + A` on the idle screen:
 - High contrast mode
 - Reduced motion options
 
-## 📊 Analytics & Insights
+## Analytics & Insights
 
 The admin dashboard provides:
 
@@ -238,7 +238,7 @@ The admin dashboard provides:
 - **Conversion Funnel**: User journey analytics
 - **Business Insights**: Actionable recommendations
 
-## 🔧 Configuration
+## Configuration
 
 ### Backend Configuration (`backend/config.ini`)
 
@@ -269,7 +269,7 @@ APPWRITE_API_KEY=your_api_key
 APPWRITE_BUCKET_ID=your_bucket_id
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Frontend Testing
 
@@ -286,7 +286,7 @@ cd backend
 python -m pytest    # Run tests (if implemented)
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Production Build (Frontend)
 
@@ -310,7 +310,7 @@ npm run build
 # Serve dist/ folder on your web server
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -318,24 +318,24 @@ npm run build
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - See the [LICENSE](LICENSE) file for details.
 
-## 👥 Team
+## Team
 
 **Evol Aura Team**
 
 - **Team Name**: Evol Aura
 - **Team Members**: Sadiya Maheen Siddiqui (Full Stack Developer and AI Engineer)
 
-## 📞 Contact
+## Contact
 
 - **Email**: adibasadiya9502@gmail.com
 - **LinkedIn**: https://www.linkedin.com/in/sadiya-maheen-siddiqui/
 - **GitHub**: https://github.com/Sadiya-125
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Fueled Contest 3.0** for the opportunity
 - **Evol Jewels** for the inspiring challenge
