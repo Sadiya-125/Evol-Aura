@@ -219,7 +219,7 @@ export const WishlistScreen = ({
       {/* Modal for AI Companion */}
       {showModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-neutral-900 border border-white/10 rounded-2xl p-8 w-[480px]">
+          <div className="bg-neutral-900 border border-white/10 rounded-2xl p-8 w-[480px] shadow-2xl">
             <h2 className="text-2xl font-light text-white mb-6">
               Create AI Companion
             </h2>
@@ -228,7 +228,7 @@ export const WishlistScreen = ({
                 placeholder="Companion Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full p-3 bg-white/10 rounded-xl text-white placeholder-white/40"
+                className="w-full p-3 bg-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
 
               <div className="flex gap-4">
@@ -237,10 +237,14 @@ export const WishlistScreen = ({
                   onChange={(e) =>
                     setStyle(e.target.value as "formal" | "casual")
                   }
-                  className="flex-1 p-3 bg-white/10 rounded-xl text-white"
+                  className="flex-1 p-3 bg-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
                 >
-                  <option value="formal">Formal</option>
-                  <option value="casual">Casual</option>
+                  <option value="formal" className="bg-neutral-900 text-white">
+                    Formal
+                  </option>
+                  <option value="casual" className="bg-neutral-900 text-white">
+                    Casual
+                  </option>
                 </select>
 
                 <select
@@ -248,10 +252,14 @@ export const WishlistScreen = ({
                   onChange={(e) =>
                     setVoice(e.target.value as "male" | "female")
                   }
-                  className="flex-1 p-3 bg-white/10 rounded-xl text-white"
+                  className="flex-1 p-3 bg-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
                 >
-                  <option value="female">Female</option>
-                  <option value="male">Male</option>
+                  <option value="female" className="bg-neutral-900 text-white">
+                    Female
+                  </option>
+                  <option value="male" className="bg-neutral-900 text-white">
+                    Male
+                  </option>
                 </select>
               </div>
 
@@ -261,21 +269,21 @@ export const WishlistScreen = ({
                 max={10}
                 value={duration}
                 onChange={(e) => setDuration(Number(e.target.value))}
-                className="w-full p-3 bg-white/10 rounded-xl text-white"
+                className="w-full p-3 bg-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="Duration (mins)"
               />
 
               <div className="flex justify-end gap-3 pt-4">
                 <button
                   onClick={() => setShowModal(false)}
-                  className="px-6 py-3 rounded-xl bg-white/10 text-white hover:bg-white/20"
+                  className="px-6 py-3 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleCreateCompanion}
                   disabled={loading}
-                  className="px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white disabled:opacity-50"
+                  className="px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white disabled:opacity-50 transition-all"
                 >
                   {loading ? "Creating..." : "Create & Speak"}
                 </button>
