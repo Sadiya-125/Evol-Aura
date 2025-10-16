@@ -22,7 +22,8 @@ We also plan **multilingual support** (English, Hindi) for inclusivity in Indian
 
 ## Key Features
 
-- **Conversational, adaptive survey** (voice + touch interaction)
+- **Conversational, Adaptive Survey** (voice + touch interaction)
+- **Vapi-Powered Voice Stylist** - an AI-driven voice companion “Evol”, powered by GPT-4, Deepgram, and ElevenLabs via Vapi AI
 - **Celebrity AI analysis** with vibe-based clustering (minimal, bold, modern, traditional)
 - **Personalized recommendation engine** with product filters
 - **Wishlist Shortlist** - customers can save favourites directly on the kiosk
@@ -32,6 +33,7 @@ We also plan **multilingual support** (English, Hindi) for inclusivity in Indian
 ## Technical Approach
 
 - **Recommendation Engine**: Hybrid filtering (survey responses + celebrity match + inventory metadata)
+- **Conversational AI Layer**: Integrated Vapi AI for real-time natural conversations
 - **Tech Stack**: Python (AI), TensorFlow/PyTorch (try on matching), Node.js backend, React-based kiosk UI
 - **Optimization**: Designed for 55-inch vertical touchscreen, smooth mirror overlay visuals
 
@@ -58,6 +60,7 @@ We also plan **multilingual support** (English, Hindi) for inclusivity in Indian
 ### Key Technologies
 
 - **AI/ML**: Diffusers, OpenCV, Mediapipe, CVZone, xFormers
+- **Conversational AI**: Vapi AI (GPT-4 + ElevenLabs + Deepgram)
 - **Web**: React, TypeScript, Vite, Tailwind CSS
 - **Backend**: FastAPI, Gradio, Docker
 - **Database**: Supabase (PostgreSQL)
@@ -192,6 +195,7 @@ docker run -p 7860:7860 evol-aura-backend
 5. **Style Match**: Celebrity vibe matching results
 6. **Products**: Personalized jewelry recommendations
 7. **Wishlist**: Save favorites and request store assistant
+8. **Voice Stylist Interaction**: Chat naturally with Evol, the AI stylist, for guidance and personalized advice
 
 ### Admin Dashboard
 
@@ -209,6 +213,7 @@ Access admin features by pressing `Alt + A` on the idle screen:
 - Touch and voice interaction
 - Adaptive questions based on responses
 - Multilingual support (English/Hindi)
+- Natural voice guidance through Vapi AI (GPT-4 + 11Labs + Deepgram)
 
 ### Celebrity Matching
 

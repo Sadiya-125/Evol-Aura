@@ -1,6 +1,13 @@
-import { QrCode, User, Trash2 } from "lucide-react";
+import { QrCode, User, Trash2, MessageSquare } from "lucide-react";
+import { useState } from "react";
 import type { Language, Product } from "../types";
 import { translate, formatPrice } from "../utils/translations";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL!,
+  import.meta.env.VITE_SUPABASE_ANON_KEY!
+);
 
 interface WishlistScreenProps {
   language: Language;
@@ -17,10 +24,68 @@ export const WishlistScreen = ({
 }: WishlistScreenProps) => {
   const qrCodeData = `evol-aura://wishlist/${Date.now()}`;
 
+  const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState("");
+  const [style, setStyle] = useState<"formal" | "casual">("formal");
+  const [voice, setVoice] = useState<"male" | "female">("female");
+  const [duration, setDuration] = useState(2);
+  const [loading, setLoading] = useState(false);
+
+  const handleCreateCompanion = async () => {
+    if (!wishlistProducts.length) {
+      alert("Your wishlist is empty!");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const topic = wishlistProducts.map((p) => p.name).join(", ");
+
+      const { data, error } = await supabase
+        .from("companions")
+        .insert([
+          {
+            name,
+            subject: "Jewellery",
+            topic,
+            style,
+            voice,
+            duration,
+            author: null,
+            projectId: null,
+          },
+        ])
+        .select("id")
+        .single();
+
+      if (error) throw error;
+
+      // Redirect to companion page
+      window.location.href = `https://evol-ai-companion.vercel.app/companions/${data.id}`;
+    } catch (err) {
+      console.error("Error creating companion:", err);
+      alert("Failed to create AI companion.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-8">
+    <div className="relative min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-8">
+      {/* Background Glow */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.15),transparent_50%)]" />
+      </div>
+
+      {/* Top Bar Button */}
+      <div className="absolute top-8 right-8 z-20">
+        <button
+          onClick={() => setShowModal(true)}
+          className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white text-lg px-6 py-3 rounded-xl shadow-lg shadow-amber-600/30 transition-all"
+        >
+          <MessageSquare className="w-5 h-5" />
+          Speak with AI
+        </button>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -28,6 +93,7 @@ export const WishlistScreen = ({
           {translate("wishlist.title", language)}
         </h1>
         <div className="grid grid-cols-3 gap-8">
+          {/* Wishlist Section */}
           <div className="col-span-2">
             {wishlistProducts.length === 0 ? (
               <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-16 text-center">
@@ -94,7 +160,9 @@ export const WishlistScreen = ({
             )}
           </div>
 
+          {/* Sidebar */}
           <div className="space-y-6">
+            {/* QR & Assistant */}
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
               <div className="flex items-center gap-3 mb-6">
                 <QrCode className="w-8 h-8 text-amber-400" />
@@ -125,6 +193,7 @@ export const WishlistScreen = ({
               </button>
             </div>
 
+            {/* Summary */}
             <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
               <h3 className="text-xl font-light text-white mb-4">Summary</h3>
               <div className="space-y-3">
@@ -146,6 +215,75 @@ export const WishlistScreen = ({
           </div>
         </div>
       </div>
+
+      {/* Modal for AI Companion */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-neutral-900 border border-white/10 rounded-2xl p-8 w-[480px]">
+            <h2 className="text-2xl font-light text-white mb-6">
+              Create AI Companion
+            </h2>
+            <div className="space-y-4">
+              <input
+                placeholder="Companion Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-3 bg-white/10 rounded-xl text-white placeholder-white/40"
+              />
+
+              <div className="flex gap-4">
+                <select
+                  value={style}
+                  onChange={(e) =>
+                    setStyle(e.target.value as "formal" | "casual")
+                  }
+                  className="flex-1 p-3 bg-white/10 rounded-xl text-white"
+                >
+                  <option value="formal">Formal</option>
+                  <option value="casual">Casual</option>
+                </select>
+
+                <select
+                  value={voice}
+                  onChange={(e) =>
+                    setVoice(e.target.value as "male" | "female")
+                  }
+                  className="flex-1 p-3 bg-white/10 rounded-xl text-white"
+                >
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                </select>
+              </div>
+
+              <input
+                type="number"
+                min={1}
+                max={10}
+                value={duration}
+                onChange={(e) => setDuration(Number(e.target.value))}
+                className="w-full p-3 bg-white/10 rounded-xl text-white"
+                placeholder="Duration (mins)"
+              />
+
+              <div className="flex justify-end gap-3 pt-4">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="px-6 py-3 rounded-xl bg-white/10 text-white hover:bg-white/20"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleCreateCompanion}
+                  disabled={loading}
+                  className="px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white disabled:opacity-50"
+                >
+                  {loading ? "Creating..." : "Create & Speak"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
