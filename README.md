@@ -334,8 +334,8 @@ This project is licensed under the MIT License - see the [LICENSE](backend/LICEN
 ## 📞 Contact
 
 - **Email**: adibasadiya9502@gmail.com
-- **LinkedIn**: [LinkedIn Profile](https://www.linkedin.com/in/sadiya-maheen-siddiqui/)
-- **GitHub**: [GitHub Profile](https://github.com/Sadiya-125)
+- **LinkedIn**: https://www.linkedin.com/in/sadiya-maheen-siddiqui/
+- **GitHub**: https://github.com/Sadiya-125
 
 ## 🙏 Acknowledgments
 
@@ -343,7 +343,5 @@ This project is licensed under the MIT License - see the [LICENSE](backend/LICEN
 - **Evol Jewels** for the inspiring challenge
 - Open source community for amazing AI/ML tools
 - React, TypeScript, and Python communities
-
----
 
 **Made with ❤️ for Fueled Contest 3.0**
