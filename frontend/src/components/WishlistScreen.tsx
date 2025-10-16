@@ -33,7 +33,7 @@ export const WishlistScreen = ({
 
   const handleCreateCompanion = async () => {
     if (!wishlistProducts.length) {
-      alert("Your wishlist is empty!");
+      alert("Your Wishlist is Empty!");
       return;
     }
 
